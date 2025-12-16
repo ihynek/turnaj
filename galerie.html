@@ -140,8 +140,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -152,14 +152,14 @@
         }
 
         .lightbox img {
-            max-width: 95%;
-            max-height: 95%;
+            max-width: 90%;
+            max-height: 90%;
             object-fit: contain;
             border-radius: 10px;
         }
 
         .lightbox-close {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 30px;
             font-size: 2em;
@@ -172,47 +172,47 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1;
             border: 3px solid white;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             transition: all 0.3s;
+            z-index: 10002;
         }
 
         .lightbox-close:hover {
             background: rgba(102, 126, 234, 1);
             transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(0,0,0,0.7);
         }
 
         .lightbox-nav {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 2em;
+            font-size: 1.5em;
             font-weight: bold;
             color: white;
             cursor: pointer;
-            background: rgba(255, 0, 0, 0.8);
-            padding: 30px 20px;
-            border: 5px solid yellow;
-            box-shadow: 0 0 50px rgba(255, 255, 0, 1);
+            background: rgba(102, 126, 234, 0.9);
+            padding: 25px 20px;
+            border: 4px solid white;
+            box-shadow: 0 0 30px rgba(255,255,255,0.5);
             transition: all 0.3s;
-            z-index: 99999;
-            min-width: 120px;
+            z-index: 10001;
+            min-width: 100px;
             text-align: center;
+            border-radius: 10px;
         }
 
         .lightbox-nav:hover {
-            background: rgba(255, 0, 0, 1);
-            transform: translateY(-50%) scale(1.1);
+            background: rgba(118, 75, 162, 1);
+            transform: translateY(-50%) scale(1.05);
         }
 
         .lightbox-prev {
-            left: 20px;
+            left: 30px;
         }
 
         .lightbox-next {
-            right: 20px;
+            right: 30px;
         }
 
         @media (max-width: 768px) {
@@ -232,24 +232,24 @@
             }
 
             .lightbox-nav {
-                width: 60px;
-                height: 60px;
-                font-size: 2.5em;
+                font-size: 1.2em;
+                padding: 20px 15px;
+                min-width: 80px;
             }
             
-            .lightbox-close {
-                width: 60px;
-                height: 60px;
-                font-size: 2.5em;
-                top: 10px;
-                right: 10px;
-            }
-
             .lightbox-prev {
                 left: 10px;
             }
 
             .lightbox-next {
+                right: 10px;
+            }
+            
+            .lightbox-close {
+                width: 45px;
+                height: 45px;
+                font-size: 1.8em;
+                top: 10px;
                 right: 10px;
             }
         }
@@ -280,9 +280,7 @@
                 Můžete procházet šipkami vlevo/vpravo nebo šipkami na klávesnici.
             </div>
 
-            <!-- ========================================
-                 ZÁKLADNÍ SKUPINY
-                 ======================================== -->
+            <!-- ZÁKLADNÍ SKUPINY -->
             <div class="day-section">
                 <div class="day-header">
                     <h2>ZÁKLADNÍ SKUPINY</h2>
@@ -290,8 +288,6 @@
                 </div>
 
                 <div class="screenshots-grid">
-                    <!-- INSTRUKCE: Nahraďte src="..." cestami k vašim obrázkům -->
-                    
                     <div class="screenshot-card" onclick="openLightbox(0)">
                         <img src="skupina1.jpeg" alt="Skupina 1">
                         <div class="screenshot-caption">Skupina 1</div>
@@ -324,9 +320,7 @@
                 </div>
             </div>
 
-            <!-- ========================================
-                 VYŘAZOVACÍ ZÁPASY
-                 ======================================== -->
+            <!-- VYŘAZOVACÍ ZÁPASY -->
             <div class="day-section">
                 <div class="day-header">
                     <h2>VYŘAZOVACÍ ZÁPASY</h2>
@@ -346,9 +340,7 @@
                 </div>
             </div>
 
-            <!-- ========================================
-                 FINÁLOVÉ ZÁPASY
-                 ======================================== -->
+            <!-- FINÁLOVÉ ZÁPASY -->
             <div class="day-section">
                 <div class="day-header">
                     <h2>FINÁLOVÉ ZÁPASY</h2>
@@ -375,40 +367,40 @@
         </div>
     </div>
 
-    <!-- Lightbox pro fullscreen zobrazení -->
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <div class="lightbox-close" onclick="closeLightbox()">×</div>
-        <div class="lightbox-prev" onclick="event.stopPropagation(); navigateLightbox(1)">
-            ⬅️<br>DALŠÍ
+        <div class="lightbox-close" onclick="event.stopPropagation(); closeLightbox()">×</div>
+        <div class="lightbox-prev" onclick="event.stopPropagation(); navigateLightbox(-1)">
+            ⬅<br>PŘEDCHOZÍ
         </div>
         <img id="lightbox-img" src="" alt="">
-        <div class="lightbox-next" onclick="event.stopPropagation(); navigateLightbox(-1)">
-            ➡️<br>ZPĚT
+        <div class="lightbox-next" onclick="event.stopPropagation(); navigateLightbox(1)">
+            DALŠÍ<br>➡
         </div>
     </div>
 
     <script>
-        // Seznam všech obrázků pro lightbox navigaci
         const images = [
-            { src: 'skupina1.jpeg', caption: 'Skupina 1' },
-            { src: 'skupina2.jpeg', caption: 'Skupina 2' },
-            { src: 'skupina3.jpeg', caption: 'Skupina 3' },
-            { src: 'skupina4.jpeg', caption: 'Skupina 4' },
-            { src: 'skupina5.jpeg', caption: 'Skupina 5' },
-            { src: 'skupina6.jpeg', caption: 'Skupina 6' },
-            { src: 'kolo1.png', caption: '1. kolo vyřazovací části' },
-            { src: 'kolo2.png', caption: '2. kolo vyřazovací části' },
-            { src: 'finale.png', caption: 'Finálové zápasy' },
-            { src: 'vysledky.png', caption: 'Konečné výsledky' }
+            'skupina1.jpeg',
+            'skupina2.jpeg',
+            'skupina3.jpeg',
+            'skupina4.jpeg',
+            'skupina5.jpeg',
+            'skupina6.jpeg',
+            'kolo1.png',
+            'kolo2.png',
+            'finale.png',
+            'vysledky.png'
         ];
 
         let currentImageIndex = 0;
 
         function openLightbox(index) {
+            console.log('Opening lightbox with index:', index);
             currentImageIndex = index;
-            document.getElementById('lightbox-img').src = images[index].src;
+            document.getElementById('lightbox-img').src = images[index];
             document.getElementById('lightbox').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Zamezit scrollování
+            document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
@@ -419,25 +411,24 @@
         function navigateLightbox(direction) {
             currentImageIndex += direction;
             
-            // Wrap around
             if (currentImageIndex < 0) {
                 currentImageIndex = images.length - 1;
             } else if (currentImageIndex >= images.length) {
                 currentImageIndex = 0;
             }
             
-            document.getElementById('lightbox-img').src = images[currentImageIndex].src;
+            console.log('Navigating to index:', currentImageIndex);
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
         }
 
-        // Klávesové zkratky
         document.addEventListener('keydown', function(e) {
             if (document.getElementById('lightbox').classList.contains('active')) {
                 if (e.key === 'Escape') {
                     closeLightbox();
                 } else if (e.key === 'ArrowLeft') {
-                    navigateLightbox(1);  // Šipka vlevo = další
+                    navigateLightbox(-1);
                 } else if (e.key === 'ArrowRight') {
-                    navigateLightbox(-1);  // Šipka vpravo = předchozí
+                    navigateLightbox(1);
                 }
             }
         });
