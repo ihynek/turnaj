@@ -132,7 +132,7 @@
             font-size: 1.1em;
         }
 
-        /* Lightbox */
+        /* Lightbox pro fullscreen zobrazení */
         .lightbox {
             display: none;
             position: fixed;
@@ -140,8 +140,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 10000;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -152,14 +152,14 @@
         }
 
         .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 95%;
+            max-height: 95%;
             object-fit: contain;
             border-radius: 10px;
         }
 
         .lightbox-close {
-            position: fixed;
+            position: absolute;
             top: 20px;
             right: 30px;
             font-size: 2em;
@@ -172,10 +172,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 1;
             border: 3px solid white;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             transition: all 0.3s;
-            z-index: 10002;
+            z-index: 1002;
         }
 
         .lightbox-close:hover {
@@ -184,7 +185,7 @@
         }
 
         .lightbox-nav {
-            position: fixed;
+            position: absolute;
             top: 50%;
             transform: translateY(-50%);
             font-size: 1.5em;
@@ -196,7 +197,7 @@
             border: 4px solid white;
             box-shadow: 0 0 30px rgba(255,255,255,0.5);
             transition: all 0.3s;
-            z-index: 10001;
+            z-index: 1001;
             min-width: 100px;
             text-align: center;
             border-radius: 10px;
@@ -269,7 +270,7 @@
             <h1>🏓 TURNAJ VE STOLNÍM TENISU</h1>
             <p>Průběžné výsledky</p>
             <div class="update-badge">
-                📅 Aktualizováno: 16. 12. 2025
+                📅 Aktualizováno: <span id="last-update">16. 12. 2025</span>
             </div>
         </div>
 
@@ -277,7 +278,7 @@
             <div class="note">
                 <strong>ℹ️ Návod:</strong>
                 Klikněte na jakýkoliv obrázek pro zobrazení v plné velikosti. 
-                Šipky: ⬅ předchozí, ➡ další, × zavřít.
+                Můžete procházet šipkami vlevo/vpravo nebo šipkami na klávesnici.
             </div>
 
             <!-- ZÁKLADNÍ SKUPINY -->
@@ -288,33 +289,33 @@
                 </div>
 
                 <div class="screenshots-grid">
-                    <div class="screenshot-card" onclick="openImage('skupina1.jpeg')">
-                        <img src="skupina1.jpeg" alt="Skupina 1">
+                    <div class="screenshot-card" onclick="openLightbox(0)">
+                        <img src="skupina6.jpeg" alt="Skupina 1">
                         <div class="screenshot-caption">Skupina 1</div>
                     </div>
 
-                    <div class="screenshot-card" onclick="openImage('skupina2.jpeg')">
-                        <img src="skupina2.jpeg" alt="Skupina 2">
+                    <div class="screenshot-card" onclick="openLightbox(1)">
+                        <img src="skupina5.jpeg" alt="Skupina 2">
                         <div class="screenshot-caption">Skupina 2</div>
                     </div>
 
-                    <div class="screenshot-card" onclick="openImage('skupina3.jpeg')">
-                        <img src="skupina3.jpeg" alt="Skupina 3">
+                    <div class="screenshot-card" onclick="openLightbox(2)">
+                        <img src="skupina4.jpeg" alt="Skupina 3">
                         <div class="screenshot-caption">Skupina 3</div>
                     </div>
 
-                    <div class="screenshot-card" onclick="openImage('skupina4.jpeg')">
-                        <img src="skupina4.jpeg" alt="Skupina 4">
+                    <div class="screenshot-card" onclick="openLightbox(3)">
+                        <img src="skupina3.jpeg" alt="Skupina 4">
                         <div class="screenshot-caption">Skupina 4</div>
                     </div>
 
-                    <div class="screenshot-card" onclick="openImage('skupina5.jpeg')">
-                        <img src="skupina5.jpeg" alt="Skupina 5">
+                    <div class="screenshot-card" onclick="openLightbox(4)">
+                        <img src="skupina2.jpeg" alt="Skupina 5">
                         <div class="screenshot-caption">Skupina 5</div>
                     </div>
 
-                    <div class="screenshot-card" onclick="openImage('skupina6.jpeg')">
-                        <img src="skupina6.jpeg" alt="Skupina 6">
+                    <div class="screenshot-card" onclick="openLightbox(5)">
+                        <img src="skupina1.jpeg" alt="Skupina 6">
                         <div class="screenshot-caption">Skupina 6</div>
                     </div>
                 </div>
@@ -328,19 +329,19 @@
                 </div>
 
                 <div class="screenshots-grid">
-                    <div class="screenshot-card" onclick="openImage('kolo1.png')">
+                    <div class="screenshot-card" onclick="openLightbox(6)">
                         <img src="kolo1.png" alt="1. kolo">
-                        <div class="screenshot-caption">1. kolo</div>
+                        <div class="screenshot-caption">1. kolo vyřazovací části</div>
                     </div>
 
-                    <div class="screenshot-card" onclick="openImage('kolo2.png')">
+                    <div class="screenshot-card" onclick="openLightbox(7)">
                         <img src="kolo2.png" alt="2. kolo">
-                        <div class="screenshot-caption">2. kolo</div>
+                        <div class="screenshot-caption">2. kolo vyřazovací části</div>
                     </div>
                 </div>
             </div>
 
-            <!-- FINÁLE -->
+            <!-- FINÁLOVÉ ZÁPASY -->
             <div class="day-section">
                 <div class="day-header">
                     <h2>FINÁLOVÉ ZÁPASY</h2>
@@ -348,14 +349,14 @@
                 </div>
 
                 <div class="screenshots-grid">
-                    <div class="screenshot-card" onclick="openImage('finale.png')">
+                    <div class="screenshot-card" onclick="openLightbox(8)">
                         <img src="finale.png" alt="Finále">
-                        <div class="screenshot-caption">Finále</div>
+                        <div class="screenshot-caption">Finálové zápasy</div>
                     </div>
 
-                    <div class="screenshot-card" onclick="openImage('vysledky.png')">
-                        <img src="vysledky.png" alt="Výsledky">
-                        <div class="screenshot-caption">🏆 VÝSLEDKY</div>
+                    <div class="screenshot-card" onclick="openLightbox(9)">
+                        <img src="vysledky.png" alt="Konečné výsledky">
+                        <div class="screenshot-caption">🏆 KONEČNÉ VÝSLEDKY</div>
                     </div>
                 </div>
             </div>
@@ -363,42 +364,42 @@
 
         <div class="footer">
             <p>Turnaj ve stolním tenisu 2025</p>
+            <p>Průběžné výsledky aktualizované každý den</p>
         </div>
     </div>
 
-    <!-- Lightbox -->
+    <!-- Lightbox pro fullscreen zobrazení -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <div class="lightbox-close" onclick="event.stopPropagation(); closeLightbox()">×</div>
-        <div class="lightbox-prev" onclick="event.stopPropagation(); navigate(-1)">
+        <div class="lightbox-close" onclick="closeLightbox()">×</div>
+        <div class="lightbox-prev" onclick="event.stopPropagation(); navigateLightbox(-1)">
             ⬅<br>PŘEDCHOZÍ
         </div>
         <img id="lightbox-img" src="" alt="">
-        <div class="lightbox-next" onclick="event.stopPropagation(); navigate(1)">
+        <div class="lightbox-next" onclick="event.stopPropagation(); navigateLightbox(1)">
             DALŠÍ<br>➡
         </div>
     </div>
 
     <script>
-        const allImages = [
-            'skupina1.jpeg',
-            'skupina2.jpeg',
-            'skupina3.jpeg',
-            'skupina4.jpeg',
-            'skupina5.jpeg',
-            'skupina6.jpeg',
-            'kolo1.png',
-            'kolo2.png',
-            'finale.png',
-            'vysledky.png'
+        // Seznam všech obrázků pro lightbox navigaci
+        const images = [
+            { src: 'skupina6.jpeg', caption: 'Skupina 1' },
+            { src: 'skupina5.jpeg', caption: 'Skupina 2' },
+            { src: 'skupina4.jpeg', caption: 'Skupina 3' },
+            { src: 'skupina3.jpeg', caption: 'Skupina 4' },
+            { src: 'skupina2.jpeg', caption: 'Skupina 5' },
+            { src: 'skupina1.jpeg', caption: 'Skupina 6' },
+            { src: 'kolo1.png', caption: '1. kolo vyřazovací části' },
+            { src: 'kolo2.png', caption: '2. kolo vyřazovací části' },
+            { src: 'finale.png', caption: 'Finálové zápasy' },
+            { src: 'vysledky.png', caption: 'Konečné výsledky' }
         ];
 
-        let currentIndex = 0;
+        let currentImageIndex = 0;
 
-        function openImage(imageSrc) {
-            console.log('Opening:', imageSrc);
-            currentIndex = allImages.indexOf(imageSrc);
-            console.log('Index:', currentIndex);
-            document.getElementById('lightbox-img').src = imageSrc;
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox-img').src = images[index].src;
             document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -408,27 +409,28 @@
             document.body.style.overflow = 'auto';
         }
 
-        function navigate(direction) {
-            currentIndex += direction;
+        function navigateLightbox(direction) {
+            currentImageIndex += direction;
             
-            if (currentIndex < 0) {
-                currentIndex = allImages.length - 1;
-            } else if (currentIndex >= allImages.length) {
-                currentIndex = 0;
+            // Wrap around
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
             }
             
-            console.log('Navigating to:', allImages[currentIndex], 'index:', currentIndex);
-            document.getElementById('lightbox-img').src = allImages[currentIndex];
+            document.getElementById('lightbox-img').src = images[currentImageIndex].src;
         }
 
+        // Klávesové zkratky
         document.addEventListener('keydown', function(e) {
             if (document.getElementById('lightbox').classList.contains('active')) {
                 if (e.key === 'Escape') {
                     closeLightbox();
                 } else if (e.key === 'ArrowLeft') {
-                    navigate(-1);
+                    navigateLightbox(-1);
                 } else if (e.key === 'ArrowRight') {
-                    navigate(1);
+                    navigateLightbox(1);
                 }
             }
         });
